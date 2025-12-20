@@ -1,0 +1,38 @@
+{
+    "name": "anikrahman/laravel-hive",
+    "description": "Multi-tenant SaaS helper for Laravel 12 with subdomain and tenant context",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Md. Anik Rahman",
+            "email": "eeythmakers@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "illuminate/support": "^12.0",
+        "illuminate/database": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AnikRahman\\Hive\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AnikRahman\\Hive\\Providers\\HiveServiceProvider"
+            ],
+            "aliases": {
+                "Tenant": "AnikRahman\\Hive\\Facades\\Tenant"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "fakerphp/faker": "^1.23"
+    }
+}
