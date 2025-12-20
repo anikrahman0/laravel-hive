@@ -4,8 +4,7 @@
 [![License](https://img.shields.io/packagist/l/anikrahman/laravel-hive.svg)](https://github.com/anikrahman0/laravel-hive/blob/main/LICENSE) -->
 <!-- [![PHP Version](https://img.shields.io/packagist/php-v/anikrahman/laravel-hive.svg)](https://www.php.net/) -->
 
-A lightweight, production-ready **multi-tenant infrastructure package** for Laravel 12 applications.  
-Laravel Hive focuses on **tenant resolution**, **isolation**, and **developer freedom** — without forcing authentication, UI, or hosting decisions.
+A lightweight, production-ready **multi-tenant infrastructure package** for Laravel 12 applications. Laravel Hive focuses on **tenant resolution**, **isolation**, and **developer freedom** — without forcing authentication, UI, or hosting decisions.
 
 ---
 
