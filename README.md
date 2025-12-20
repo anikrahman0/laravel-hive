@@ -1,6 +1,3 @@
-
----
-
 # Laravel Hive 🐝
 <img src="https://i.imgur.com/FMc1luj.png">
 <!-- [![Packagist Version](https://img.shields.io/packagist/v/anikrahman/laravel-hive.svg)](https://packagist.org/packages/anikrahman/laravel-hive)
