@@ -1,12 +1,11 @@
-Here is the complete, final `README.md` file for your Laravel Hive package, updated to your specifications:
 
 ---
 
 # Laravel Hive 🐝
-
-[![Packagist Version](https://img.shields.io/packagist/v/anikrahman/laravel-hive.svg)](https://packagist.org/packages/anikrahman/laravel-hive)
-[![License](https://img.shields.io/packagist/l/anikrahman/laravel-hive.svg)](https://github.com/anikrahman0/laravel-hive/blob/main/LICENSE)
-[![PHP Version](https://img.shields.io/packagist/php-v/anikrahman/laravel-hive.svg)](https://www.php.net/)
+<img src="https://i.imgur.com/FMc1luj.png">
+<!-- [![Packagist Version](https://img.shields.io/packagist/v/anikrahman/laravel-hive.svg)](https://packagist.org/packages/anikrahman/laravel-hive)
+[![License](https://img.shields.io/packagist/l/anikrahman/laravel-hive.svg)](https://github.com/anikrahman0/laravel-hive/blob/main/LICENSE) -->
+<!-- [![PHP Version](https://img.shields.io/packagist/php-v/anikrahman/laravel-hive.svg)](https://www.php.net/) -->
 
 A lightweight, production-ready **multi-tenant infrastructure package** for Laravel 12 applications.  
 Laravel Hive focuses on **tenant resolution**, **isolation**, and **developer freedom** — without forcing authentication, UI, or hosting decisions.
