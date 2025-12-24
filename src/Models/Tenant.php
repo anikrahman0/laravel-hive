@@ -23,7 +23,12 @@ class Tenant extends Model
      */
     public static function current(): ?self
     {
-        return app()->make('currentTenant');
+        // Check if 'currentTenant' exists in container FIRST
+        if (app()->has('currentTenant')) {
+            return app()->make('currentTenant');
+        }
+
+        return null;
     }
 
     /**

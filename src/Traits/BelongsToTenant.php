@@ -13,7 +13,18 @@ trait BelongsToTenant
     protected static function bootBelongsToTenant(): void
     {
         static::addGlobalScope('tenant', function (Builder $builder) {
-            $builder->where('tenant_id', Tenant::getTenantId());
+            $tenantId = Tenant::id();
+
+            if ($tenantId !== null) {
+                $builder->where('tenant_id', $tenantId);
+            }
+        });
+
+        // Auto-set tenant_id when creating - THIS MUST BE OUTSIDE THE SCOPE!
+        static::creating(function ($model) {
+            if (empty($model->tenant_id) && $tenantId = Tenant::id()) {
+                $model->tenant_id = $tenantId;
+            }
         });
     }
 }

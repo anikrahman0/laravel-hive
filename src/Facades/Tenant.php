@@ -13,4 +13,12 @@ class Tenant extends Facade
     {
         return 'currentTenant'; // Returns the tenant from container
     }
+
+    /**
+     * Get the current tenant instance.
+     */
+    public static function current()
+    {
+        return app()->bound('currentTenant') ? app()->make('currentTenant') : null;
+    }
 }
