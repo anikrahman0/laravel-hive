@@ -4,11 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Default Tenant Database Connection
+    | Default Tenant Connection
     |--------------------------------------------------------------------------
-    | This connection will be used when DB-per-tenant mode is enabled.
+    | This connection will be used when database_per_tenant architecture is enabled.
+    | Connection template defined in config/database.php
     */
-    'tenant_connection' => 'tenant',
+    'tenant_connection' => env('TENANT_CONNECTION', 'tenant'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,18 +29,6 @@ return [
     | Default Tenant Plan
     |--------------------------------------------------------------------------
     */
-    'default_plan' => 'free',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Feature Flags
-    |--------------------------------------------------------------------------
-    | Define default features available for tenants. Can be overridden per tenant.
-    */
-    'features' => [
-        'blog' => true,
-        'analytics' => false,
-        'ecommerce' => false,
-    ],
+    'default_plan' => env('TENANT_DEFAULT_PLAN', 'free'),
 
 ];

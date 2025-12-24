@@ -15,7 +15,6 @@ return new class extends Migration
             $table->string('custom_domain')->nullable()->unique();
             $table->string('plan')->default('free');
             $table->tinyInteger('status')->default(1); // 1=active, 0=suspended
-            $table->string('database')->nullable(); // for DB-per-tenant
             $table->timestamps();
         });
     }

@@ -4,46 +4,60 @@ namespace AnikRahman\Hive\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
 use Symfony\Component\HttpFoundation\Response;
 use AnikRahman\Hive\Models\Tenant;
 
 class HiveTenantMiddleware
 {
     /**
-     * Resolve tenant from subdomain or custom domain
-     * and block inactive tenants.
+     * Handle an incoming request.
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $host = $request->getHost();              // acme.example.com
-        $segments = explode('.', $host);
-        $subdomain = $segments[0];
+        // Resolve tenant from request
+        $tenant = $this->resolveTenant($request);
 
-        $tenant = Tenant::where('subdomain', $subdomain)
-            ->orWhere('custom_domain', $host)
-            ->first();
-
-        // No tenant found → let app decide (landing page, 404, etc.)
+        // No tenant found → continue (public routes)
         if (! $tenant) {
             app()->instance('currentTenant', null);
             return $next($request);
         }
 
-        // 🚫 Block suspended tenants
-        if ((int) $tenant->status === 0) {
-            abort(403, 'Tenant account is suspended.');
+        // Check if tenant is active
+        if (! $tenant->isActive()) {
+            abort(403, 'Tenant account is suspended or inactive.');
         }
 
         // Bind tenant globally
         app()->instance('currentTenant', $tenant);
 
-        // Optional: DB-per-tenant switching
-        if ($tenant->database) {
-            Config::set('database.connections.tenant.database', $tenant->database);
-            \DB::setDefaultConnection('tenant');
+        return $next($request);
+    }
+
+    /**
+     * Resolve tenant from subdomain or custom domain.
+     */
+    protected function resolveTenant(Request $request): ?Tenant
+    {
+        $host = $request->getHost();
+        $segments = explode('.', $host);
+
+        if (count($segments) > 2) {
+            $subdomain = $segments[0];
+
+            // Get reserved subdomains from config
+            $reserved = config('laravel-hive.reserved_subdomains', []);
+            if (in_array($subdomain, $reserved)) {
+                return null;
+            }
+
+            $tenant = Tenant::where('subdomain', $subdomain)->first();
+            if ($tenant) {
+                return $tenant;
+            }
         }
 
-        return $next($request);
+        // Check custom domain
+        return Tenant::where('custom_domain', $host)->first();
     }
 }
