@@ -12,7 +12,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('subdomain')->unique();
-            $table->string('custom_domain')->nullable()->unique();
             $table->string('plan')->default('free');
             $table->tinyInteger('status')->default(1); // 1=active, 0=suspended
             $table->timestamps();

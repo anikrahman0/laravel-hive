@@ -32,7 +32,7 @@ class TenantsListCommand extends Command
     public function handle()
     {
         // Fetch all tenants with selected columns
-        $tenants = Tenant::select('id', 'name', 'subdomain', 'plan', 'status', 'database')
+        $tenants = Tenant::select('id', 'name', 'subdomain', 'plan', 'status')
             ->orderBy('id', 'asc')
             ->get();
 
@@ -42,10 +42,21 @@ class TenantsListCommand extends Command
             return 0;
         }
 
+        // Format tenants data for table display
+        $tableData = $tenants->map(function ($tenant) {
+            return [
+                $tenant->id,
+                $tenant->name,
+                $tenant->subdomain,
+                $tenant->plan,
+                $tenant->status === 1 ? 'Active' : 'Inactive',
+            ];
+        })->toArray();
+
         // Display formatted table with headers
         $this->table(
-            ['ID', 'Name', 'Subdomain', 'Plan', 'Status', 'Database'],
-            $tenants->toArray()
+            ['ID', 'Name', 'Subdomain', 'Plan', 'Status'],
+            $tableData
         );
 
         // Optional: Display summary statistics
